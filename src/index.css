@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+--color-primary-100: #E6F0FF;
+--color-primary-200: #B3D1FF;
+--color-primary-300: #80B3FF;
+--color-primary-400: #4D94FF;
+--color-primary-500: #1A75FF;
+--color-primary-600: #005CE6;
+--color-primary-700: #0047B3;
+}
+
 @layer components {
 .btn-primary {
     @apply bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200 font-medium;
