@@ -1,3 +1,4 @@
+// importaciones
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { productService } from '../services/productService';
@@ -7,6 +8,8 @@ import Loader from '../components/Loader';
 import toast from 'react-hot-toast';
 import { ShoppingCart, ArrowLeft, Plus, Minus } from 'lucide-react';
 
+
+// Página de detalle de un producto con galería de imágenes, selector de cantidad y botón de compra
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
+   // Obtiene los datos del producto por ID; redirige al inicio si ocurre un error 
   const fetchProduct = async () => {
     try {
       setLoading(true);
@@ -35,6 +39,7 @@ const ProductDetail = () => {
     }
   };
 
+  // Agrega el producto al carrito; redirige al login si el usuario no está autenticado
   const handleAddToCart = () => {
     if (!isAuthenticated) {
       toast.error('Debes iniciar sesión para agregar productos al carrito');
@@ -47,11 +52,13 @@ const ProductDetail = () => {
   const incrementQuantity = () => setQuantity(q => q + 1);
   const decrementQuantity = () => setQuantity(q => Math.max(1, q - 1));
 
+    // Retorna el arreglo de imágenes del producto o un placeholder si no tiene
   const getProductImages = () => {
     if (product?.productImgs && product.productImgs.length > 0) {
       return product.productImgs.map(img => img.url);
     }
-    return ['https://via.placeholder.com/600x600?text=No+Image'];
+    // return ['https://via.placeholder.com/600x600?text=No+Image'];
+    return <a href="https://www.flaticon.com/free-icons/product-details" ></a>;
   };
 
   if (loading) {
@@ -66,7 +73,7 @@ const ProductDetail = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Back Button */}
+      {/* Botón Atrás */}
       <button
         onClick={() => navigate('/')}
         className="flex items-center space-x-2 text-gray-600 hover:text-primary-600 mb-6"
@@ -108,7 +115,7 @@ const ProductDetail = () => {
           )}
         </div>
 
-        {/* Product Info */}
+        {/* informacion del producto */}
         <div className="space-y-6">
           {product.category && (
             <span className="inline-block bg-primary-100 text-primary-800 text-sm px-3 py-1 rounded-full">
@@ -128,7 +135,7 @@ const ProductDetail = () => {
             <p className="text-gray-600">{product.description}</p>
           </div>
 
-          {/* Quantity Selector */}
+          {/* Selector de cantidad */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
               Cantidad
@@ -152,7 +159,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* Add to Cart Button */}
+          {/* Botón Añadir al carrito */}
           <button
             onClick={handleAddToCart}
             className="w-full btn-primary flex items-center justify-center space-x-2 py-3"

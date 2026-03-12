@@ -1,9 +1,12 @@
+// mportaciones
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import { LogIn } from 'lucide-react';
 
+
+// Página de inicio de sesión con formulario de email y contraseña
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -20,6 +23,8 @@ const Login = () => {
     });
   };
 
+
+  // Envía las credenciales y redirige al inicio si el login es exitoso
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -54,6 +59,7 @@ const Login = () => {
           </p>
         </div>
         
+          {/* Formulario de login con campos de email y contraseña */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>

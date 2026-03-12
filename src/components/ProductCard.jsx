@@ -1,14 +1,17 @@
+// impórtaciones
 import { ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
+// Tarjeta individual de producto con imagen, info y botón de agregar al carrito
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { isAuthenticated } = useAuth();
 
+  // Agrega el producto al carrito; redirige al login si el usuario no está autenticado
   const handleAddToCart = (e) => {
     e.stopPropagation();
     if (!isAuthenticated) {
@@ -19,15 +22,17 @@ const ProductCard = ({ product }) => {
     addToCart(product.id);
   };
 
+  // Redirige al detalle del producto al hacer click en la tarjeta
   const handleCardClick = () => {
     navigate(`/products/${product.id}`);
   };
 
+  // Retorna la primera imagen del producto o un placeholder si no tiene
   const getProductImage = () => {
     if (product.productImgs && product.productImgs.length > 0) {
       return product.productImgs[0].url;
     }
-    return 'https://via.placeholder.com/300x300?text=No+Image';
+    return <a href="https://www.flaticon.com/free-icons/smart-cart"></a>;
   };
 
   return (
@@ -35,7 +40,7 @@ const ProductCard = ({ product }) => {
       onClick={handleCardClick}
       className="card cursor-pointer group"
     >
-      {/* Image */}
+      {/* Imagen */}
       <div className="relative overflow-hidden rounded-lg mb-4 h-48 bg-gray-100">
         <img
           src={getProductImage()}
@@ -49,7 +54,7 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      {/* Content */}
+      {/* Contentido */}
       <div className="space-y-2">
         <h3 className="font-semibold text-lg text-gray-900 line-clamp-2">
           {product.title}
@@ -58,7 +63,7 @@ const ProductCard = ({ product }) => {
           {product.description}
         </p>
         
-        {/* Price and Add to Cart */}
+        {/* Precio y añadir al carrito */}
         <div className="flex items-center justify-between pt-2">
           <span className="text-2xl font-bold text-primary-600">
             ${parseFloat(product.price).toFixed(2)}

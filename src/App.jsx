@@ -1,3 +1,4 @@
+// importaciones
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
@@ -10,19 +11,24 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Cart from './pages/Cart';
 import Purchases from './pages/Purchases';
+import { toastConfig } from './config/toastConfig';
 
+// Componente raíz que configura los proveedores globales, rutas y notificaciones
 function App() {
   return (
     <BrowserRouter>
+    {/* AuthProvider y CartProvider envuelven la app para dar acceso global a sus contextos */}
       <AuthProvider>
         <CartProvider>
           <div className="min-h-screen bg-gray-50">
             <Navbar />
             <Routes>
+              {/* Rutas públicas accesibles sin autenticación */}
               <Route path="/" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              {/* Rutas protegidas que requieren sesión activa */}
               <Route
                 path="/cart"
                 element={
@@ -40,30 +46,7 @@ function App() {
                 }
               />
             </Routes>
-            <Toaster
-              position="top-right"
-              toastOptions={{
-                duration: 3000,
-                style: {
-                  background: '#363636',
-                  color: '#fff',
-                },
-                success: {
-                  duration: 3000,
-                  iconTheme: {
-                    primary: '#10b981',
-                    secondary: '#fff',
-                  },
-                },
-                error: {
-                  duration: 4000,
-                  iconTheme: {
-                    primary: '#ef4444',
-                    secondary: '#fff',
-                  },
-                },
-              }}
-            />
+            <Toaster position="top-right" toastOptions={toastConfig} />
           </div>
         </CartProvider>
       </AuthProvider>

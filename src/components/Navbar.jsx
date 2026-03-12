@@ -1,13 +1,17 @@
+// importaciones
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, User, LogOut, Package } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
+// Barra de navegación principal de la aplicación
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const { getCartCount } = useCart();
   const navigate = useNavigate();
 
+
+   // Cierra la sesión del usuario y redirige al login
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -26,7 +30,7 @@ const Navbar = () => {
             <span className="text-xl font-bold text-gray-900">Super Extra</span>
           </Link>
 
-          {/* Navigation Links */}
+          {/* Enlaces de navegación */}
           <div className="flex items-center space-x-6">
             <Link 
               to="/" 
@@ -44,7 +48,7 @@ const Navbar = () => {
                   Mis Compras
                 </Link>
                 
-                {/* Cart */}
+                {/* Carrito */}
                 <Link 
                   to="/cart" 
                   className="relative text-gray-700 hover:text-primary-600 transition-colors"
@@ -57,7 +61,7 @@ const Navbar = () => {
                   )}
                 </Link>
 
-                {/* User Menu */}
+                {/* menu de usuario */}
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-2 text-gray-700">
                     <User className="h-5 w-5" />

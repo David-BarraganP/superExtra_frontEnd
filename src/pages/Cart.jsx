@@ -1,3 +1,4 @@
+// importaciones
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { purchaseService } from '../services/purchaseService';
@@ -6,6 +7,8 @@ import Loader from '../components/Loader';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
+
+// Página del carrito de compras con gestión de items y resumen del pedido
 const Cart = () => {
   const navigate = useNavigate();
   const { cartItems, loading, updateCartItem, removeFromCart, getCartTotal, fetchCart } = useCart();
@@ -20,6 +23,7 @@ const Cart = () => {
     removeFromCart(itemId);
   };
 
+  // Procesa la compra, actualiza el carrito y redirige al historial de compras
   const handleCheckout = async () => {
     try {
       setPurchasing(true);
@@ -35,17 +39,20 @@ const Cart = () => {
     }
   };
 
+  // Retorna la primera imagen del producto o un placeholder si no tiene
   const getProductImage = (product) => {
     if (product?.productImgs && product.productImgs.length > 0) {
       return product.productImgs[0].url;
     }
-    return 'https://via.placeholder.com/100x100?text=No+Image';
+    return <a href="https://www.flaticon.com/free-icons/smart-cart"></a>;
   };
 
   if (loading) {
     return <Loader />;
   }
 
+
+ // Vista cuando el carrito está vacío 
   if (cartItems.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -75,11 +82,11 @@ const Cart = () => {
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Cart Items */}
+        {/* Artículos del carrito*/}
         <div className="lg:col-span-2 space-y-4">
           {cartItems.map((item) => (
             <div key={item.id} className="card flex items-center space-x-4">
-              {/* Image */}
+              {/* Imagen */}
               <img
                 src={getProductImage(item.product)}
                 alt={item.product?.title}
@@ -99,7 +106,7 @@ const Cart = () => {
                 </p>
               </div>
 
-              {/* Quantity Controls */}
+              {/* Controles para aumentar o disminuir cantidad */}
               <div className="flex items-center space-x-3">
                 <button
                   onClick={() => handleUpdateQuantity(item, item.quantity - 1)}
@@ -125,7 +132,7 @@ const Cart = () => {
                 </p>
               </div>
 
-              {/* Remove Button */}
+              {/* Quitar botón */}
               <button
                 onClick={() => handleRemoveItem(item.id)}
                 className="text-red-600 hover:text-red-700"
@@ -136,7 +143,7 @@ const Cart = () => {
           ))}
         </div>
 
-        {/* Order Summary */}
+        {/* Resumen del pedido */}
         <div className="lg:col-span-1">
           <div className="card sticky top-20">
             <h2 className="text-xl font-bold text-gray-900 mb-4">

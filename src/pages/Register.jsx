@@ -1,9 +1,11 @@
+// importaciones
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import { UserPlus } from 'lucide-react';
 
+// Página de registro de nuevo usuario con campos de nombre, email, teléfono y contraseña
 const Register = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -23,6 +25,8 @@ const Register = () => {
     });
   };
 
+ 
+  // Envía los datos del formulario y redirige al login si el registro es exitoso
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -56,7 +60,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
-        
+        {/* Formulario de registro con validación requerida*/}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">

@@ -1,3 +1,4 @@
+// Componente de carga visual que muestra un spinner centrado en pantalla
 const Loader = () => {
   return (
     <div className="flex justify-center items-center py-12">

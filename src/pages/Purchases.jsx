@@ -1,9 +1,11 @@
+// importaciones
 import { useState, useEffect } from 'react';
 import { purchaseService } from '../services/purchaseService';
 import Loader from '../components/Loader';
 import toast from 'react-hot-toast';
 import { Package, Calendar } from 'lucide-react';
 
+// Página que muestra el historial de compras del usuario agrupadas por fecha
 const Purchases = () => {
   const [purchases, setPurchases] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,13 +27,16 @@ const Purchases = () => {
     }
   };
 
+    // Retorna la primera imagen del producto o un placeholder si no tiene
   const getProductImage = (product) => {
     if (product?.productImgs && product.productImgs.length > 0) {
       return product.productImgs[0].url;
     }
-    return 'https://via.placeholder.com/100x100?text=No+Image';
+    return <a href="https://www.flaticon.com/free-icons/buy"></a>;
   };
 
+
+  // Formatea una fecha en formato legible en español
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('es-ES', {
@@ -41,7 +46,8 @@ const Purchases = () => {
     });
   };
 
-  // Group purchases by date
+  
+    // Agrupa las compras por fecha para mostrarlas como pedidos del mismo día
   const groupedPurchases = purchases.reduce((acc, purchase) => {
     const date = new Date(purchase.createdAt).toDateString();
     if (!acc[date]) {
@@ -55,6 +61,7 @@ const Purchases = () => {
     return <Loader />;
   }
 
+  // Vista cuando el usuario no tiene compras registradas
   if (purchases.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -76,7 +83,7 @@ const Purchases = () => {
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
         Mis Compras
       </h1>
-
+      {/*  Calcula el total del pedido sumando precio x cantidad de cada item */}
       <div className="space-y-8">
         {Object.entries(groupedPurchases).map(([date, items]) => {
           const totalAmount = items.reduce(
@@ -86,7 +93,7 @@ const Purchases = () => {
 
           return (
             <div key={date} className="space-y-4">
-              {/* Date Header */}
+              {/* encabezado con fecha */}
               <div className="flex items-center justify-between border-b pb-3">
                 <div className="flex items-center space-x-2 text-gray-700">
                   <Calendar className="h-5 w-5" />
@@ -102,11 +109,11 @@ const Purchases = () => {
                 </div>
               </div>
 
-              {/* Purchase Items */}
+              {/* Items del pedido con imagen, info y precios */}
               <div className="grid grid-cols-1 gap-4">
                 {items.map((purchase) => (
                   <div key={purchase.id} className="card flex items-center space-x-4">
-                    {/* Image */}
+                    {/* Imagen */}
                     <img
                       src={getProductImage(purchase.product)}
                       alt={purchase.product?.title}
@@ -126,7 +133,7 @@ const Purchases = () => {
                       </p>
                     </div>
 
-                    {/* Price */}
+                    {/* Pricio */}
                     <div className="text-right">
                       <p className="text-sm text-gray-600">Precio unitario</p>
                       <p className="font-semibold text-gray-900">

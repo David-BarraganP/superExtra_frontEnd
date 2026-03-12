@@ -1,12 +1,15 @@
+// importaciones
 import { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '../services/authService';
 
 const AuthContext = createContext(null);
 
+// Proveedor global de autenticación que gestiona el estado del usuario (login, register, logout)
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Al montar, recupera el usuario actual desde el servicio de autenticación
   useEffect(() => {
     const currentUser = authService.getCurrentUser();
     setUser(currentUser);
@@ -37,6 +40,8 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: authService.isAuthenticated(),
   };
 
+
+  // No renderiza los hijos hasta que se verifique el estado de autenticación
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
@@ -44,6 +49,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// Hook para consumir el contexto de autenticación; lanza error si se usa fuera del proveedor
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

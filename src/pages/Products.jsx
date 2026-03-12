@@ -1,3 +1,4 @@
+// importaciones
 import { useState, useEffect } from 'react';
 import { productService } from '../services/productService';
 import { categoryService } from '../services/categoryService';
@@ -6,6 +7,7 @@ import Loader from '../components/Loader';
 import toast from 'react-hot-toast';
 import { Search, Filter } from 'lucide-react';
 
+// Página principal de productos con búsqueda por texto y filtro por categoría
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,6 +15,7 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
+  //  recargar productos y categorias cada qur cambia la categoria seleccionada
   useEffect(() => {
     fetchCategories();
     fetchProducts();
@@ -40,6 +43,7 @@ const Products = () => {
     }
   };
 
+  // Filtra los productos localmente según el texto ingresado en el buscador
   const filteredProducts = products.filter(product =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     product.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -57,9 +61,9 @@ const Products = () => {
         </p>
       </div>
 
-      {/* Filters */}
+      {/* filtros por categoria */}
       <div className="mb-8 space-y-4">
-        {/* Search */}
+        {/* barra de busqueda  */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <input
@@ -71,7 +75,7 @@ const Products = () => {
           />
         </div>
 
-        {/* Categories */}
+        {/* Categorias */}
         <div className="flex items-center space-x-4 overflow-x-auto pb-2">
           <Filter className="text-gray-400 h-5 w-5 flex-shrink-0" />
           <button
@@ -100,7 +104,7 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Products Grid */}
+      {/* Grid de productos */}
       {loading ? (
         <Loader />
       ) : filteredProducts.length === 0 ? (
