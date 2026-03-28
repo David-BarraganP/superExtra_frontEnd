@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
     if (product.productImgs && product.productImgs.length > 0) {
       return product.productImgs[0].url;
     }
-    return <a href="https://www.flaticon.com/free-icons/smart-cart"></a>;
+    return 'https://placehold.co/400x400?text=Sin+imagen';
   };
 
   return (

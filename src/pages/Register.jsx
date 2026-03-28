@@ -8,11 +8,10 @@ import { UserPlus } from 'lucide-react';
 // Página de registro de nuevo usuario con campos de nombre, email, teléfono y contraseña
 const Register = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    userName: '',
     email: '',
     password: '',
-    phone: '',
+    rol: 'client', // rol fijo por defecto
   });
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
@@ -60,42 +59,27 @@ const Register = () => {
             </Link>
           </p>
         </div>
+
         {/* Formulario de registro con validación requerida*/}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+          {/* Campo userName */}
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                  Nombre
+                <label htmlFor="userName" className="block text-sm font-medium text-gray-700 mb-1">
+                  Nombre de usuario
                 </label>
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  required
-                  className="input-field"
-                  placeholder="Juan"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
+               <input
+                id="userName"
+                name="userName"
+                type="text"
+                required
+                className="input-field"
+                placeholder="juanperez123"
+                value={formData.userName}
+                onChange={handleChange}
+              />
               </div>
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                  Apellido
-                </label>
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  required
-                  className="input-field"
-                  placeholder="Pérez"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
+          {/* Campo Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email
@@ -112,23 +96,7 @@ const Register = () => {
                 onChange={handleChange}
               />
             </div>
-
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                Teléfono
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                required
-                className="input-field"
-                placeholder="+57 300 123 4567"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </div>
-
+        {/* Campo password */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                 Contraseña
@@ -140,7 +108,7 @@ const Register = () => {
                 autoComplete="new-password"
                 required
                 className="input-field"
-                placeholder="••••••••"
+                placeholder="•••••••"
                 value={formData.password}
                 onChange={handleChange}
               />

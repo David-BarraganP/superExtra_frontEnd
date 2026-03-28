@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { authService } from '../services/authService';
 
 const AuthContext = createContext(null);
+isAuthenticated
 
 // Proveedor global de autenticación que gestiona el estado del usuario (login, register, logout)
 export const AuthProvider = ({ children }) => {
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
-    isAuthenticated: authService.isAuthenticated(),
+    isAuthenticated: !!user,
   };
 
 
