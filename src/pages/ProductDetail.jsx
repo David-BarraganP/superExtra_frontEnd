@@ -58,7 +58,7 @@ const ProductDetail = () => {
       return product.productImgs.map(img => img.url);
     }
     // return ['https://via.placeholder.com/600x600?text=No+Image'];
-    return 'https://placehold.co/400x400?text=Sin+imagen';
+    return ['https://placehold.co/400x400?text=Sin+imagen'];
   };
 
   if (loading) {
