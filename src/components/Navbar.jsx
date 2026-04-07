@@ -10,6 +10,8 @@ const Navbar = () => {
   const { getCartCount } = useCart();
   const navigate = useNavigate();
 
+  
+
 
    // Cierra la sesión del usuario y redirige al login
   const handleLogout = () => {
@@ -66,7 +68,7 @@ const Navbar = () => {
                   <div className="flex items-center space-x-2 text-gray-700">
                     <User className="h-5 w-5" />
                     <span className="text-sm">
-                      {user?.firstName} {user?.lastName}
+                      {user?.userName} 
                     </span>
                   </div>
                   <button
