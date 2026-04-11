@@ -133,6 +133,10 @@ const ProductDetail = () => {
 
           <div className="prose prose-sm">
             <p className="text-gray-600">{product.description}</p>
+            {/*codigo a futuro talla */}
+            <div>
+            <p className="text-3xl font-bold text-gray-900">Talla #</p>
+            </div>
           </div>
 
           {/* Selector de cantidad */}
