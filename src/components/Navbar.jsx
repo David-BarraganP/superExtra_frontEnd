@@ -49,6 +49,25 @@ const Navbar = () => {
                 >
                   Mis Compras
                 </Link>
+
+                {/* Enlace al panel admin solo si es administrador */}
+                    {user?.rol === 'admin' && (
+                  <div className="flex items-center space-x-4">
+                    <Link 
+                      to="/admin/products" 
+                      className="text-gray-700 hover:text-primary-600 transition-colors"
+                    >
+                      Admin Productos
+                    </Link>
+                    <Link 
+                    to="/admin/categories" 
+                    className="text-gray-700 hover:text-primary-600 transition-colors"
+                   >
+                      Admin Categorías
+                    </Link>
+                  </div>
+                )}
+
                 
                 {/* Carrito */}
                 <Link 
