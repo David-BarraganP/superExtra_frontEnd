@@ -94,17 +94,25 @@ const Cart = () => {
               />
 
               {/* Info */}
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg text-gray-900">
-                  {item.product?.title}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {item.product?.category?.name}
-                </p>
-                <p className="text-primary-600 font-bold mt-1">
-                  ${parseFloat(item.product?.price || 0).toFixed(2)}
-                </p>
-              </div>
+             <div className="flex-1">
+               <h3 className="font-semibold text-lg text-gray-900">
+                 {item.product?.title}
+               </h3>
+               <p className="text-gray-600 text-sm">
+                 {item.product?.category?.name}
+               </p>
+               {/* Talla seleccionada */}
+               {item.sizeId && item.product?.sizes && (
+                 <p className="text-gray-600 text-sm">
+                   Talla: <span className="font-semibold">
+                    {item.product.sizes.find(s => s.id === item.sizeId)?.size || item.sizeId}
+                    </span>
+                 </p>
+               )}
+               <p className="text-primary-600 font-bold mt-1">
+                 ${parseFloat(item.product?.price || 0).toFixed(2)}
+               </p>
+             </div>
 
               {/* Controles para aumentar o disminuir cantidad */}
               <div className="flex items-center space-x-3">

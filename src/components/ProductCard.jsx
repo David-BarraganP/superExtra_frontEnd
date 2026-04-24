@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
       navigate('/login');
       return;
     }
-    addToCart(product.id);
+    navigate(`/products/${product.id}`);
   };
 
   // Redirige al detalle del producto al hacer click en la tarjeta

@@ -31,15 +31,14 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-
   // Recarga el carrito cada vez que cambia el estado de autenticación
   useEffect(() => {
     fetchCart();
   }, [isAuthenticated]);
 
-  const addToCart = async (productId, quantity = 1) => {
+const addToCart = async (productId, quantity = 1, sizeId = null) => {
     try {
-      await cartService.addToCart({ productId, quantity });
+      await cartService.addToCart({ productId, quantity, sizeId });
       await fetchCart();
       toast.success('Producto agregado al carrito');
     } catch (error) {
