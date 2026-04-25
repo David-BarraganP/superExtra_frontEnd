@@ -15,6 +15,7 @@ import Purchases from './pages/Purchases';
 import AdminProducts from './pages/AdminProducts';
 import AdminCategories from './pages/AdminCategories';
 import { toastConfig } from './config/toastConfig';
+import AdminImages from './pages/AdminImages';
 
 // Componente raíz que configura los proveedores globales, rutas y notificaciones
 function App() {
@@ -43,7 +44,7 @@ function App() {
                   <Purchases />
                 </ProtectedRoute>
               }/>
-
+              
               {/* Rutas protegidas para admin */}
               <Route path="/admin/products" element={
                 <ProtectedAdminRoute>
@@ -55,6 +56,11 @@ function App() {
                   <AdminCategories />
                 </ProtectedAdminRoute>
               }/>
+              <Route path="/admin/images" element={
+                <ProtectedAdminRoute>
+                  <AdminImages />
+                </ProtectedAdminRoute>
+              }/>        
             </Routes>
             <Toaster position="top-right" toastOptions={toastConfig} />
           </div>

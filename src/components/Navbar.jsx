@@ -1,6 +1,6 @@
 // importaciones
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, User, LogOut, Package } from 'lucide-react';
+import { ShoppingCart, User, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
@@ -59,12 +59,21 @@ const Navbar = () => {
                     >
                       Admin Productos
                     </Link>
+
                     <Link 
                     to="/admin/categories" 
                     className="text-gray-700 hover:text-primary-600 transition-colors"
                    >
                       Admin Categorías
                     </Link>
+
+                    <Link 
+                      to="/admin/images" 
+                      className="text-gray-700 hover:text-primary-600 transition-colors"
+                    >
+                      Admin Imágenes
+                    </Link>
+
                   </div>
                 )}
 
