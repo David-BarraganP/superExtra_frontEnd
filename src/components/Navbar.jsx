@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img  src="/public/imageLogo.png" 
+            <img  src="/imageLogo.png" 
             alt="SuperExtraLogo" 
             className="h-15 w-15 text-primary-600"
             />
