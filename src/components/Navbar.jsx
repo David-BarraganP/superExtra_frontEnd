@@ -42,6 +42,9 @@ const Navbar = () => {
                 <Link to="/purchases" className="text-gray-700 hover:text-primary-600 transition-colors">
                   Mis Compras
                 </Link>
+                <Link to="/orders" className="text-gray-700 hover:text-primary-600 transition-colors">
+                Mis Órdenes
+                </Link>
 
                 {user?.rol === 'admin' && (
                   <div className="flex items-center space-x-4">
@@ -54,6 +57,9 @@ const Navbar = () => {
                     <Link to="/admin/images" className="text-gray-700 hover:text-primary-600 transition-colors">
                       Admin Imágenes
                     </Link>
+                    <Link to="/admin/orders" className="text-gray-700 hover:text-primary-600 transition-colors">
+                    Admin Órdenes
+                  </Link>
                   </div>
                 )}
 
@@ -126,6 +132,9 @@ const Navbar = () => {
               <Link to="/purchases" onClick={closeMenu} className="block text-gray-700 hover:text-primary-600 transition-colors py-2">
                 Mis Compras
               </Link>
+              <Link to="/orders" onClick={closeMenu} className="text-gray-700 hover:text-primary-600 transition-colors">
+                Mis Órdenes
+              </Link>
 
               {user?.rol === 'admin' && (
                 <>
@@ -137,6 +146,9 @@ const Navbar = () => {
                   </Link>
                   <Link to="/admin/images" onClick={closeMenu} className="block text-gray-700 hover:text-primary-600 transition-colors py-2">
                     Admin Imágenes
+                  </Link>
+                  <Link to="/admin/orders" onClick={closeMenu} className="text-gray-700 hover:text-primary-600 transition-colors">
+                    Admin Órdenes
                   </Link>
                 </>
               )}

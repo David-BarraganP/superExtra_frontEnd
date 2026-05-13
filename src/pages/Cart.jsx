@@ -1,18 +1,17 @@
 // importaciones
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { purchaseService } from '../services/purchaseService';
+// import { purchaseService } from '../services/purchaseService';
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import Loader from '../components/Loader';
-import toast from 'react-hot-toast';
-import { useState } from 'react';
-
+// import toast from 'react-hot-toast';
+// import { useState } from 'react';
 
 // Página del carrito de compras con gestión de items y resumen del pedido
 const Cart = () => {
   const navigate = useNavigate();
   const { cartItems, loading, updateCartItem, removeFromCart, getCartTotal, fetchCart } = useCart();
-  const [purchasing, setPurchasing] = useState(false);
+  // const [purchasing, setPurchasing] = useState(false);
 
   const handleUpdateQuantity = (item, newQuantity) => {
     if (newQuantity < 1) return;
@@ -24,20 +23,20 @@ const Cart = () => {
   };
 
   // Procesa la compra, actualiza el carrito y redirige al historial de compras
-  const handleCheckout = async () => {
-    try {
-      setPurchasing(true);
-      await purchaseService.create();
-      toast.success('¡Compra realizada exitosamente!');
-      await fetchCart(); // Refresh cart
-      navigate('/purchases');
-    } catch (error) {
-      console.error('Error during checkout:', error);
-      toast.error('Error al procesar la compra');
-    } finally {
-      setPurchasing(false);
-    }
-  };
+  // const handleCheckout = async () => {
+  //   try {
+  //     setPurchasing(true);
+  //     await purchaseService.create();
+  //     toast.success('¡Compra realizada exitosamente!');
+  //     await fetchCart(); // Refresh cart
+  //     navigate('/purchases');
+  //   } catch (error) {
+  //     console.error('Error during checkout:', error);
+  //     toast.error('Error al procesar la compra');
+  //   } finally {
+  //     setPurchasing(false);
+  //   }
+  // };
 
   // Retorna la primera imagen del producto o un placeholder si no tiene
   const getProductImage = (product) => {
@@ -174,13 +173,11 @@ const Cart = () => {
                 </span>
               </div>
             </div>
-
             <button
-              onClick={handleCheckout}
-              disabled={purchasing}
-              className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => navigate('/checkout')}
+              className="w-full btn-primary"
             >
-              {purchasing ? 'Procesando...' : 'Proceder al Pago'}
+              Proceder al Pago
             </button>
 
             <button
