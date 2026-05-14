@@ -11,7 +11,7 @@ import Loader from '../components/Loader';
 const Cart = () => {
   const navigate = useNavigate();
   const { cartItems, loading, updateCartItem, removeFromCart, getCartTotal, fetchCart } = useCart();
-  // const [purchasing, setPurchasing] = useState(false);
+  
 
   const handleUpdateQuantity = (item, newQuantity) => {
     if (newQuantity < 1) return;
@@ -22,21 +22,6 @@ const Cart = () => {
     removeFromCart(itemId);
   };
 
-  // Procesa la compra, actualiza el carrito y redirige al historial de compras
-  // const handleCheckout = async () => {
-  //   try {
-  //     setPurchasing(true);
-  //     await purchaseService.create();
-  //     toast.success('¡Compra realizada exitosamente!');
-  //     await fetchCart(); // Refresh cart
-  //     navigate('/purchases');
-  //   } catch (error) {
-  //     console.error('Error during checkout:', error);
-  //     toast.error('Error al procesar la compra');
-  //   } finally {
-  //     setPurchasing(false);
-  //   }
-  // };
 
   // Retorna la primera imagen del producto o un placeholder si no tiene
   const getProductImage = (product) => {
@@ -84,69 +69,74 @@ const Cart = () => {
         {/* Artículos del carrito*/}
         <div className="lg:col-span-2 space-y-4">
           {cartItems.map((item) => (
-            <div key={item.id} className="card flex items-center space-x-4">
-              {/* Imagen */}
-              <img
-                src={getProductImage(item.product)}
-                alt={item.product?.title}
-                className="w-24 h-24 object-cover rounded-lg"
-              />
-
-              {/* Info */}
-             <div className="flex-1">
-               <h3 className="font-semibold text-lg text-gray-900">
-                 {item.product?.title}
-               </h3>
-               <p className="text-gray-600 text-sm">
-                 {item.product?.category?.name}
-               </p>
-               {/* Talla seleccionada */}
-               {item.sizeId && item.product?.sizes && (
-                 <p className="text-gray-600 text-sm">
-                   Talla: <span className="font-semibold">
+        <div key={item.id} className="card">
+          <div className="flex items-center space-x-3">
+            {/* Imagen */}
+            <img
+              src={getProductImage(item.product)}
+              alt={item.product?.title}
+              className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+            />
+        
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-gray-900 truncate">
+                {item.product?.title}
+              </h3>
+              <p className="text-gray-600 text-sm">
+                {item.product?.category?.name}
+              </p>
+              {item.sizeId && item.product?.sizes && (
+                <p className="text-gray-600 text-sm">
+                  Talla: <span className="font-semibold">
                     {item.product.sizes.find(s => s.id === item.sizeId)?.size || item.sizeId}
-                    </span>
-                 </p>
-               )}
-               <p className="text-primary-600 font-bold mt-1">
-                 ${parseFloat(item.product?.price || 0).toFixed(2)}
-               </p>
-             </div>
-
-              {/* Controles para aumentar o disminuir cantidad */}
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={() => handleUpdateQuantity(item, item.quantity - 1)}
-                  className="p-1 rounded hover:bg-gray-100"
-                >
-                  <Minus className="h-4 w-4" />
-                </button>
-                <span className="font-semibold w-8 text-center">
-                  {item.quantity}
-                </span>
-                <button
-                  onClick={() => handleUpdateQuantity(item, item.quantity + 1)}
-                  className="p-1 rounded hover:bg-gray-100"
-                >
-                  <Plus className="h-4 w-4" />
-                </button>
-              </div>
-
-              {/* Subtotal */}
-              <div className="text-right">
-                <p className="font-bold text-lg text-gray-900">
-                  ${(parseFloat(item.product?.price || 0) * item.quantity).toFixed(2)}
+                  </span>
                 </p>
-              </div>
-
-              {/* Quitar botón */}
+              )}
+              <p className="text-primary-600 font-bold mt-1">
+                ${parseFloat(item.product?.price || 0).toFixed(2)}
+              </p>
+            </div>
+        
+            {/* Botón eliminar */}
+            <button
+              onClick={() => handleRemoveItem(item.id)}
+              className="text-red-600 hover:text-red-700 flex-shrink-0"
+            >
+              <Trash2 className="h-5 w-5" />
+            </button>
+          </div>
+        
+          {/* Controles cantidad y subtotal */}
+          <div className="flex items-center justify-between mt-3 pt-3 border-t">
+            <div className="flex items-center space-x-3">
               <button
-                onClick={() => handleRemoveItem(item.id)}
-                className="text-red-600 hover:text-red-700"
-              >
-                <Trash2 className="h-5 w-5" />
+                onClick={() => handleUpdateQuantity(item, item.quantity - 1)}
+                className="p-1 rounded hover:bg-gray-100"
+             >
+                <Minus className="h-4 w-4" />
+              </button>
+              <span className="font-semibold w-8 text-center">
+                {item.quantity}
+              </span>
+              <button
+                onClick={() => handleUpdateQuantity(item, item.quantity + 1)}
+                className="p-1 rounded hover:bg-gray-100"
+                      >
+                <Plus className="h-4 w-4" />
               </button>
             </div>
+        
+            <p className="font-bold text-lg text-gray-900">
+              ${(parseFloat(item.product?.price || 0) * item.quantity).toFixed(2)}
+            </p>
+          </div>
+        </div>
+
+
+
+
+           
           ))}
         </div>
 
